@@ -10,7 +10,7 @@ git push -u origin main
 //Write more in README.md file then
 README.md -->�Readme file�
 git add README.md
-git commit -m� [La=vanya] add: First change�
+git commit -m� [Lavanya] add: First change�
 git status
 ls
 
