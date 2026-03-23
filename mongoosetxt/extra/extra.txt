@@ -1,0 +1,26 @@
+Implementing pagination in Mongoose
+
+Pagination involves limiting the number of results returned and optionally skipping previous results. Common approach:
+
+const page = 2; // Current page
+const limit = 10; // Documents per page
+const skip = (page - 1) * limit;
+
+const users = await User.find()
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+Alternative: Using mongoose-paginate-v2 plugin
+
+const options = { page: 2, limit: 10 };
+const result = await User.paginate({}, options);
+
+✅ Key points: Use .skip() and .limit() or a pagination plugin.
+
+5. When to use embedding vs referencing in MongoDB schema design
+Feature	Embedding (Nested Documents)	Referencing (Normalization)
+Use case	When related data is tightly coupled and often accessed together.	When related data is large, shared, or updated frequently.
+Performance	Fast reads since all data is in one document.	Might need multiple queries or .populate(); slower reads.
+Updates	Harder if embedded array grows too large (16MB limit).	Easier to update independently; avoids duplication.
+Example	Blog post with comments embedded inside the post document.	User collection and posts collection with userId reference.
