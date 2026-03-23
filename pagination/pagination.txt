@@ -1,0 +1,45 @@
+question 4:Basic Pagination Using skip() and limit()
+const page = 2; // current page number
+const limit = 10; // number of documents per page
+const skip = (page - 1) * limit;
+const results = await Model.find()
+  .skip(skip)
+  .limit(limit);
+
+Pagination With Sorting
+  const results = await Model.find()
+  .sort({ createdAt: -1 }) // -1 for descending, 1 for ascending
+  .skip(skip)
+  .limit(limit);
+
+
+Sending Pagination Info
+const totalDocuments = await Model.countDocuments();
+const totalPages = Math.ceil(totalDocuments / limit);
+
+res.json({
+  page,
+  totalPages,
+  results});
+
+Using a Mongoose Plugin
+const mongoosePaginate = require('mongoose-paginate-v2');
+
+const schema = new mongoose.Schema({
+  name: String,
+  createdAt: Date,
+});
+
+schema.plugin(mongoosePaginate);
+
+const Model = mongoose.model('Model', schema);
+
+// Pagination query
+const options = {
+  page: 2,
+  limit: 10,
+  sort: { createdAt: -1 },
+};
+
+const results = await Model.paginate({}, options);
+console.log(results);
