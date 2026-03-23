@@ -1,4 +1,4 @@
-Difference between findOneAndUpdate() and updateOne()
+qestion-2 Difference between findOneAndUpdate() and updateOne()
 Feature	findOneAndUpdate()	updateOne()
 Returns	The document before or after update (configurable with returnDocument option).	The update result (acknowledgment and number of modified docs).
 Use case	When you need the updated document immediately.	When you only care about performing the update, not fetching the document.
